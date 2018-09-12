@@ -1,0 +1,102 @@
+#This is the file where we tell poccer what sort of evidence to collect for us.
+#Passing arguments in through YAML aint pretty...and is also pretty dangerous....dont blame me if you get haxed
+#ensure any command you run has its colour codes turned off or your output will be a mess until i strip it
+-
+  name: "SSL TLS Versions Supported" #PLZ NO SPECIAL CHARACTERS :(
+  pluginid: "56984" #SSL / TLS Versions Supported
+  command: sslscan
+  arguments: "--show-certificate --no-colour _ip_:_port_" #It is important to ensure that positional arguments are correct here we ensure that a colon is placed between the IP and port recovered from Nessus
+  timeout: 45 #value in seconds, sslscan is quite quick so should be done long before a 45 second timeout
+  grepper: #grep the sslscan output for specific results, and then output them to dedicated files....
+    - RC4_Ciphers: "RC4"
+    - SSLv3: "SSLv3"
+    - SSLv2: "SSLv2"
+    - 3DES: "3DES"
+    - DES: "DES"
+    - CBC: "CBC"
+-
+  name: "SSL TLS Versions Supported"
+  pluginid: "56984"
+  command: testssl.sh
+  arguments: "--color 0 _ip_:_port_"
+  timeout: 360 #Testssl is slow on a lot of hosts, this should avoid a timeout
+  grepper:
+    - ""
+-
+  name: "SSL TLS Versions Supported"
+  pluginid: "56984"
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=ssl-*"
+  timeout: 60
+-
+  name: "SMB Signing Disabled"
+  pluginid: "57608"
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=smb-security-mode"
+  timeout: 20
+-
+  name: "RDP Crypto Checks"
+  pluginid: "10940" #Windows Terminal Services Enabled
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=rdp-enum-encryption"
+  timeout: 20
+-
+  name: "MS12-020"
+  pluginid: "58435"
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=rdp-vuln-ms12-020"
+  timeout: 20
+-
+  name: "SSH Algorithms"
+  pluginid: "10267" #SSH Server Type and Version Information
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=ssh2-enum-algos"
+  timeout: 20
+-
+  name: "SSH Version"
+  pluginid: "10267" #SSH Server Type and Version Information
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ -sV"
+  timeout: 20
+-
+  name: "SNMP Public"
+  pluginid: "41028" #SNMP Agent Default Community Name(Public)
+  command: nmap
+  arguments: "-n -Pn -sU _ip_ -p _port_ --script=snmp-brute.nse"
+  timeout: 20
+-
+  name: "SMB NULL Session"
+  pluginid: "26920" #Microsoft Windows SMB NULL Session Authentication
+  command: smbclient
+  arguments: "-I _ip_ -L TEST -N -U \"\""
+  timeout: 20
+-
+  name: "DNS Server Cache Snooping"
+  pluginid: "12217" #DNS Server Cache Snooping Remote Information Disclosure
+  command: nmap
+  arguments: "-Pn -n -sU -p_port_ _ip_ --script=dns-cache-snoop"
+  timeout: 20
+-
+  name: "HTTP Methods"
+  pluginid: "43111" #HTTP Methods Allowed (per directory)
+  command: nmap
+  arguments: "-Pn -n _ip_ -p_port_ --script=http-methods"
+  timeout: 20
+-
+  name: "HTTP Headers"
+  pluginid: "43111" #HTTP Methods Allowed (per directory) - may need to expand this to get SSL headers too...
+  command: curl
+  arguments: "-Ik _ip_:_port_"
+  timeout: 20
+-
+  name: "NTP Mode 6"
+  pluginid: "97861" #Network Time Protocol (NTP) Mode 6 Scanner
+  command: ntpq
+  arguments: "-p _ip_"
+  timeout: 5
+-
+  name: "HTTP TRACE"
+  pluginid: "11213" #HTTP TRACE / TRACK Methods Allowed
+  command: curl
+  arguments: "-v -X TRACE http://_ip_:_port_"
+  timeout: 20

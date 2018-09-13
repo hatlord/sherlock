@@ -29,6 +29,18 @@
   arguments: "-n -Pn _ip_ -p _port_ --script=ssl-*"
   timeout: 60
 -
+  name: "HTTPS Security Headers"
+  pluginid: "56984"
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=http-security-headers"
+  timeout: 60
+-
+  name: "HTTPS Headers"
+  pluginid: "56984"
+  command: curl
+  arguments: "-Ik https://_ip_:_port_"
+  timeout: 20
+-
   name: "SMB Signing Disabled"
   pluginid: "57608"
   command: nmap

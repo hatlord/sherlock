@@ -24,7 +24,7 @@ bundle install
 
 Once Sherlock runs, it will prompt you to select which Nessus files you would like to use, which can be chosen using cursor keys and space/enter. It will then go off and perform its checks.
 
-##Known issues
+##Known Issues
 Currently it does not write evidence as it goes, so if it fails half way through a job, you won't get the evidence text files written to disk. At the moment, the debug.log will still contain all commands that Sherlock has run and all output as a safety net. Bear in mind that this covers commands run since you first installed it, so it could have data from multiple targets. The intention is to expand it to write evidence as it goes and allow session resumption.
 
 

@@ -4,7 +4,7 @@ Sherlock is basically designed to allow you to capture large amounts of vulnerab
 
 It does this by sucking in a directory of Nessus files, asks you which touse, then runs user-specified OS commands for a given pluginID. It will de-dupe any issues found across these Nessus files.
 
-## Use Cases
+### Use Cases
 
 If you look in /vulns/vulns.yaml you can see and edit the mappings file for yourself. Simply put, you provide a Nessus pluginID and a check (command) to run in order to gather extra evidence. For example, for every host and port that has "SSL / TLS Versions Supported", run sslscan, testssl.sh, nmap with ssl scripts and then write the output to files.  
 There are several mappings included within the yaml file, but you can build this out to do whatever you need really.

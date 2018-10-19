@@ -8,7 +8,7 @@ class FileWriter
 
   def directory
     time    = Time.now.strftime("%d%b%Y_%H%M%S")
-    @basedir = "#{Dir.home}/Documents/Sherlock_Out/#{time}"
+    @basedir = "#{Dir.home}/Documents/Sherlock_Out/Sherlock_#{time}"
     FileUtils.mkdir_p(basedir) unless File.exists?(basedir)
   end
 

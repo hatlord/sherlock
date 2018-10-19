@@ -96,10 +96,16 @@
   timeout: 20
 -
   name: "HTTP Headers"
-  pluginid: "43111" #HTTP Methods Allowed (per directory) - may need to expand this to get SSL headers too...
+  pluginid: "43111" #HTTP Methods Allowed (per directory)
   command: curl
   arguments: "-Ik _ip_:_port_"
   timeout: 20
+-
+  name: "HTTP Security Headers"
+  pluginid: "43111" #HTTP Methods Allowed (per directory)
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=http-security-headers"
+  timeout: 60
 -
   name: "NTP Mode 6"
   pluginid: "97861" #Network Time Protocol (NTP) Mode 6 Scanner

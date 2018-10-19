@@ -2,7 +2,7 @@
 
 Sherlock is basically designed to allow you to capture large amounts of vulnerability and penetration test evidence in an automated fashion.  
 
-It does this by sucking in a directory of Nessus files, asks you which touse, then runs user-specified OS commands for a given pluginID. It will de-dupe any issues found across these Nessus files.
+It does this by sucking in a directory of Nessus files, asks you which to use, then runs user-specified OS commands for a given pluginID. It will de-dupe any issues found across these Nessus files.
 
 ### Use Cases
 

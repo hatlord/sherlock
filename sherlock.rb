@@ -18,7 +18,7 @@ require_relative 'lib/parse_nessus'
 puts Banner.new.banner.blue
 
 if ARGV.empty?
-  puts "You didn't provide a Nessus file!.\nUsage: ./sherlock.rb /path/to/your/scan.nessus".red.bold
+  puts "You didn't provide a Nessus folder location!.\nUsage: ./sherlock.rb /path/to/your/nessusfolder/".red.bold
   exit
 end
 

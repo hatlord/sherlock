@@ -9,7 +9,11 @@ class ParseNessus
 
   def choose_nessus_files
     prompt  = TTY::Prompt.new
-    @choices = prompt.multi_select("Which Nessus files would you like to use?", nessus_files, per_page: 20, echo: false)
+    if nessus_files.length > 1
+      @choices = prompt.multi_select("Which Nessus files would you like to use?", nessus_files, per_page: 20, echo: false)
+    else
+      @choices = @nessus_files
+    end
   end
 
   def parse_nessus_file

@@ -18,7 +18,7 @@
   name: "SSL TLS Versions Supported"
   pluginid: "56984"
   command: testssl.sh
-  arguments: "--color 0 _ip_:_port_"
+  arguments: "--csv --color 0 _ip_:_port_"
   timeout: 360 #Testssl is slow on a lot of hosts, this should avoid a timeout
   grepper:
     - ""

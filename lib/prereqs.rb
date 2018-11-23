@@ -21,7 +21,7 @@ class ToolsInstalled
   def check_tools
     tools.each do |tool|
       if TTY::Which.which(tool).nil?
-        puts "#{tool} appears to be missing, install before proceeding\nExiting....".red.bold
+        puts "#{tool} appears to be missing, install and add to path before proceeding\nExiting....".red.bold
         exit
       else
         puts "#{tool} appears to be installed.".green.bold

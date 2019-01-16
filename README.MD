@@ -16,7 +16,7 @@ The entire point of this tool is to capture terminal output to files, but in som
 >name: "SSL TLS Versions Supported"  
 >pluginid: "56984"  
 >command: testssl.sh  
->arguments: "--csvfile=**_dir_** --color 0 _ip_:_port_"  
+>arguments: "--csvfile=**\_dir\_** --color 0 _ip_:_port_"  
 >timeout: 360 #Testssl is slow on a lot of hosts, this should avoid a timeout
 
 

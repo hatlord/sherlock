@@ -24,7 +24,7 @@ end
 
 class BuildChecks
 
-  attr_reader   :nessus, :vuln_array, :yaml_file
+  attr_reader   :nessus, :vuln_array, :yaml_file, :basedir
   attr_accessor :check_array
 
   def initialize(nessus, yaml_file)
@@ -35,13 +35,19 @@ class BuildChecks
     @check_array = []
   end
 
+  def directory
+    time       = Time.now.strftime("%d%b%Y_%H%M%S")
+    @basedir   = "#{Dir.home}/Documents/Sherlock_Out/Sherlock_#{time}"
+    FileUtils.mkdir_p(@basedir) unless File.exists?(@basedir)
+  end
+
   def final_checks
     yaml_file.checks.each do |check|
       vuln_array.each do |vuln|
         if check['pluginid'] == vuln[:pluginid]
           check['ip']        = vuln[:ip]
           check['port']      = vuln[:port]
-          check['finalargs'] = check['arguments'].gsub("_ip_", check['ip']).gsub("_port_", check['port'])
+          check['finalargs'] = check['arguments'].gsub("_ip_", check['ip']).gsub("_port_", check['port']).gsub("_dir_", @basedir)
           check_array << check.dup
         end
       end
@@ -85,8 +91,9 @@ nessus = ParseNessus.new
 nessus.choose_nessus_files
 nessus.parse_nessus_file
 buildchecks = BuildChecks.new(nessus, yaml_file)
+buildchecks.directory
+# puts buildchecks.directory
 scanner = Scanner.new(buildchecks)
 scanner.run_command
-filecreate = FileWriter.new(scanner)
-filecreate.directory
+filecreate = FileWriter.new(scanner, buildchecks)
 filecreate.iterate_data

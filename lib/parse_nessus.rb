@@ -22,14 +22,14 @@ class ParseNessus
       nessus_file = Nokogiri::XML(File.read(choice))
       nessus_file.xpath('//NessusClientData_v2/Report/ReportHost').each do |host|
         vulns = {}
-          vulns[:ip] = host.xpath('./@name').text
+        vulns[:ip] = host.xpath('./@name').text
 
-          host.xpath('./ReportItem').each do |item|
-            vulns[:name]       = item.xpath('./@pluginName').text
-            vulns[:proto]      = item.xpath('./@protocol').text
-            vulns[:port]       = item.xpath('./@port').text
-            vulns[:pluginid]   = item.xpath('./@pluginID').text
-            vuln_array << vulns.dup
+        host.xpath('./ReportItem').each do |item|
+          vulns[:name]       = item.xpath('./@pluginName').text
+          vulns[:proto]      = item.xpath('./@protocol').text
+          vulns[:port]       = item.xpath('./@port').text
+          vulns[:pluginid]   = item.xpath('./@pluginID').text
+          vuln_array << vulns.dup
         end
       end
     end

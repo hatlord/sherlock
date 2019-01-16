@@ -10,7 +10,7 @@ If you look in /vulns/vulns.yaml you can see and edit the mappings file for your
 There are several mappings included within the yaml file, but you can build this out to do whatever you need really.  
 Note that you can insert IPs and Ports from the Nessus into your chosen command arguments with \_ip\_ and \_port\_.
   
-###Tool Output  
+### Tool Output 
 The entire point of this tool is to capture terminal output to files, but in some cases you may want the tool you run to dump its own file. You can achieve this by adding the command switch and then using the \_dir\_ argument to drop the file into the same output directory as the other evidence. For example, getting testssl to dump its csv file for each host scanned:  
 
 >name: "SSL TLS Versions Supported"  

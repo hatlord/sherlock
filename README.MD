@@ -25,7 +25,10 @@ The entire point of this tool is to capture terminal output to files, but in som
 
 
 Ensure that you are running Ruby 2.5+ and then:
-bundle install
+bundle install  
+Any tool that Sherlock runs needs to be in your PATH. For example, should you want testssl to be launched you can add the following to your .bashrc:  
+PATH=$PATH:/root/testssl/testssl.sh
+The path will need to be modified to suit your environment.
 
 ### Execution  
 

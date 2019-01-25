@@ -9,13 +9,26 @@ It does this by sucking in a directory of Nessus files, asks you which to use, t
 If you look in /vulns/vulns.yaml you can see and edit the mappings file for yourself. Simply put, you provide a Nessus pluginID and a check (command) to run in order to gather extra evidence. For example, for every host and port that has "SSL / TLS Versions Supported", run sslscan, testssl.sh, nmap with ssl scripts and then write the output to files.  
 There are several mappings included within the yaml file, but you can build this out to do whatever you need really.  
 Note that you can insert IPs and Ports from the Nessus into your chosen command arguments with \_ip\_ and \_port\_.
+  
+### Tool Output 
+The entire point of this tool is to capture terminal output to files, but in some cases you may want the tool you run to dump its own file. You can achieve this by adding the command switch and then using the \_dir\_ argument to drop the file into the same output directory as the other evidence. For example, getting testssl to dump its csv file for each host scanned:  
+
+>name: "SSL TLS Versions Supported"  
+>pluginid: "56984"  
+>command: testssl.sh  
+>arguments: "--csvfile=**\_dir\_** --color 0 _ip_:_port_"  
+>timeout: 360 #Testssl is slow on a lot of hosts, this should avoid a timeout
+
 
 
 ### Installation 
 
 
 Ensure that you are running Ruby 2.5+ and then:
-bundle install
+bundle install  
+Any tool that Sherlock runs needs to be in your PATH. For example, should you want testssl to be launched you can add the following to your .bashrc:  
+PATH=$PATH:/root/testssl/testssl.sh
+The path will need to be modified to suit your environment.
 
 ### Execution  
 

@@ -24,15 +24,16 @@ end
 
 class BuildChecks
 
-  attr_reader   :nessus, :vuln_array, :yaml_file, :basedir
+  attr_reader :nessus, :vuln_array, :yaml_file, :basedir
   attr_accessor :check_array
 
-  def initialize(nessus, yaml_file)
-    @nessus      = nessus
-    @yaml_file   = yaml_file
-    @vuln_array  = nessus.vuln_array
-    @vuln_array  = vuln_array
-    @check_array = []
+  def initialize(nessus, yaml_file, tool_installed)
+    @nessus         = nessus
+    @yaml_file      = yaml_file
+    @vuln_array     = nessus.vuln_array
+    @vuln_array     = vuln_array
+    @check_array    = []
+    @tool_installed = tool_installed
   end
 
   def directory
@@ -41,8 +42,21 @@ class BuildChecks
     FileUtils.mkdir_p(@basedir) unless File.exists?(@basedir)
   end
 
+  def remove_checks
+    #removes checks for tools that are not installed
+    temp_array = []
+    yaml_file.checks.each do |inner_hash|
+      @tool_installed.tool_present.each do |tool|
+        if inner_hash.has_value?(tool)
+          temp_array << inner_hash
+        end
+      end
+    end
+    @final_commands = temp_array
+  end
+
   def final_checks
-    yaml_file.checks.each do |check|
+    @final_commands.each do |check|
       vuln_array.each do |vuln|
         if check['pluginid'] == vuln[:pluginid]
           check['ip']        = vuln[:ip]
@@ -90,9 +104,9 @@ tool_installed.check_tools
 nessus = ParseNessus.new
 nessus.choose_nessus_files
 nessus.parse_nessus_file
-buildchecks = BuildChecks.new(nessus, yaml_file)
+buildchecks = BuildChecks.new(nessus, yaml_file, tool_installed)
 buildchecks.directory
-# puts buildchecks.directory
+buildchecks.remove_checks
 scanner = Scanner.new(buildchecks)
 scanner.run_command
 filecreate = FileWriter.new(scanner, buildchecks)

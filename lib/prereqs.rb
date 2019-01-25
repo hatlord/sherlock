@@ -1,9 +1,10 @@
 class ToolsInstalled
 
-  attr_reader :yaml_file
+  attr_reader :yaml_file, :tool_present
 
   def initialize(yaml_file)
-    @yaml_file = yaml_file
+    @yaml_file      = yaml_file
+    @tool_present   = []
   end
 
   def tools
@@ -21,10 +22,10 @@ class ToolsInstalled
   def check_tools
     tools.each do |tool|
       if TTY::Which.which(tool).nil?
-        puts "#{tool} appears to be missing, install and add to path before proceeding\nExiting....".red.bold
-        exit
+        puts "#{tool} appears to be missing, install and add to path to perform these checks....".red.bold
       else
         puts "#{tool} appears to be installed.".green.bold
+        @tool_present << tool
       end
     end
     puts

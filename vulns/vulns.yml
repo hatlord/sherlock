@@ -71,6 +71,12 @@
   arguments: "-n -Pn _ip_ -p _port_ -sV"
   timeout: 20
 -
+  name: "SSH Auth Types"
+  pluginid: "10267" #SSH Server Type and Version Information
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=ssh-auth-methods"
+  timeout: 20
+-
   name: "SNMP Public"
   pluginid: "41028" #SNMP Agent Default Community Name(Public)
   command: nmap

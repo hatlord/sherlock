@@ -9,8 +9,10 @@ require 'colorize'
 require 'nokogiri'
 require 'fileutils'
 require 'threadify'
+require 'text-table'
 require_relative 'lib/banner'
 require_relative 'lib/prereqs'
+require_relative 'lib/sslscrape'
 require_relative 'lib/filewriter'
 require_relative 'lib/yaml_reader'
 require_relative 'lib/parse_nessus'
@@ -109,5 +111,8 @@ buildchecks.directory
 buildchecks.remove_checks
 scanner = Scanner.new(buildchecks)
 scanner.run_command
+sslscrape = SSLScrape.new(scanner, buildchecks)
+sslscrape.get_sslscan_results
+sslscrape.output
 filecreate = FileWriter.new(scanner, buildchecks)
 filecreate.iterate_data

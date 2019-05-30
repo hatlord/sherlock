@@ -7,13 +7,6 @@
   command: sslscan
   arguments: "--show-certificate --no-colour _ip_:_port_" #It is important to ensure that positional arguments are correct here we ensure that a colon is placed between the IP and port recovered from Nessus
   timeout: 45 #value in seconds, sslscan is quite quick so should be done long before a 45 second timeout
-  grepper: #grep the sslscan output for specific results, and then output them to dedicated files....
-    - RC4_Ciphers: "RC4"
-    - SSLv3: "SSLv3"
-    - SSLv2: "SSLv2"
-    - 3DES: "3DES"
-    - DES: "DES"
-    - CBC: "CBC"
 -
   name: "SSL TLS Versions Supported"
   pluginid: "56984"

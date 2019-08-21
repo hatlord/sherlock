@@ -111,8 +111,8 @@ buildchecks.directory
 buildchecks.remove_checks
 scanner = Scanner.new(buildchecks)
 scanner.run_command
-sslscrape = SSLScrape.new(scanner, buildchecks)
-sslscrape.get_sslscan_results
-sslscrape.output
+# sslscrape = SSLScrape.new(scanner, buildchecks)
+# sslscrape.get_sslscan_results
+# sslscrape.output
 filecreate = FileWriter.new(scanner, buildchecks)
 filecreate.iterate_data

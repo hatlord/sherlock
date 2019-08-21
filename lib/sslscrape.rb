@@ -12,6 +12,9 @@ class SSLScrape
     @results << ["IP Address", "CertIssuer", "CertHostname", "Signature", "RSA Key Length", "Port" ]
     scanner.buildchecks.each do |issue|
       if issue["command"] == "sslscan"
+        puts issue["out"].class
+        puts issue["out"].empty?
+        pp issue["out"]
         sslscan = issue["out"].split("\n")
         issuer     = sslscan.select { |i| i[/Issuer: \/CN=/]}[0].split(" ")[1]
         subject    = sslscan.select { |i| i[/Subject:/]}[1].split(" ")[1]

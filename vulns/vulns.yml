@@ -117,3 +117,9 @@
   command: curl
   arguments: "-v -X TRACE http://_ip_:_port_"
   timeout: 20
+-
+  name: "Anonymous FTP"
+  pluginid: "10092"
+  command: nmap
+  arguments: "-n -Pn _ip_ -p _port_ --script=ftp-anon"
+  timeout: 5

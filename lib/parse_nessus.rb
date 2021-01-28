@@ -3,7 +3,7 @@ class ParseNessus
   attr_reader :vuln_array, :nessus_files, :choices
 
   def initialize
-    @nessus_files = Dir.glob(ARGV[0] + '/*.nessus')
+    @nessus_files = Dir.glob(ARGV[0] + '/*.{nessus,xml}')
     @vuln_array = []
   end
 

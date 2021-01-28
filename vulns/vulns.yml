@@ -76,6 +76,18 @@
   arguments: "-n -Pn -sU _ip_ -p _port_ --script=snmp-brute.nse"
   timeout: 20
 -
+  name: "SNMP Public SNMPWalk"
+  pluginid: "41028" #SNMP Agent Default Community Name(Public)
+  command: snmpwalk
+  arguments: "-c public -v2c _ip_ iso.3.6.1.2.1.1.1.0"
+  timeout: 20
+-
+  name: "SNMP Private SNMPWalk"
+  pluginid: "41028" #SNMP Agent Default Community Name(Public)
+  command: snmpwalk
+  arguments: "-c private -v2c _ip_ iso.3.6.1.2.1.1.1.0"
+  timeout: 20
+-
   name: "SMB NULL Session"
   pluginid: "26920" #Microsoft Windows SMB NULL Session Authentication
   command: smbclient
@@ -115,7 +127,7 @@
   name: "HTTP TRACE"
   pluginid: "11213" #HTTP TRACE / TRACK Methods Allowed
   command: curl
-  arguments: "-v -X TRACE http://_ip_:_port_"
+  arguments: "-vs -X TRACE http://_ip_:_port_ 2>&1"
   timeout: 20
 -
   name: "Anonymous FTP"

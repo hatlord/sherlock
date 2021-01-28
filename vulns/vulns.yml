@@ -124,6 +124,12 @@
   arguments: "-p _ip_"
   timeout: 5
 -
+  name: "NTP Information"
+  pluginid: "10884" #Network Time Protocol (NTP) Server Detection
+  command: nmap
+  arguments: "-Pn -n -sU -p_port_ _ip_ --script=ntp-info"
+  timeout: 5
+-
   name: "HTTP TRACE"
   pluginid: "11213" #HTTP TRACE / TRACK Methods Allowed
   command: curl

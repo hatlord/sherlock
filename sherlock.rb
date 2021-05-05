@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 #Sherlock is a pen test proof of concept tool. It takes a .nessus file as input and then attempts to verify using other tools.
-#Version 0.9
+#Version 0.95
 require 'pp'
-require 'tty'
+require 'tty-command'
+require 'tty-prompt'
+require 'tty-which'
 require 'yaml'
 require 'logger'
 require 'colorize'

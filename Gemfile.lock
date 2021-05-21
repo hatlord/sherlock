@@ -3,7 +3,7 @@ GEM
   specs:
     colorize (0.8.1)
     mini_portile2 (2.5.1)
-    nokogiri (1.11.3)
+    nokogiri (1.11.4)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     pastel (0.8.0)
@@ -23,6 +23,7 @@ GEM
       tty-screen (~> 0.8)
       wisper (~> 2.0)
     tty-screen (0.8.1)
+    tty-which (0.4.2)
     wisper (2.0.1)
 
 PLATFORMS
@@ -35,6 +36,7 @@ DEPENDENCIES
   threadify
   tty-command
   tty-prompt
+  tty-which
 
 BUNDLED WITH
    2.1.2
